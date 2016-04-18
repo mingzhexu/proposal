@@ -1,0 +1,221 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thin Sectioned Essay
+% LaTeX Template
+% Version 1.0 (3/8/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper, 12pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{hyperref}
+
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{50pt} % Some vertical space between the title and author name
+
+{\large\@author} % Author name
+\\\@date % Date
+
+\vspace{40pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Master Thesis Proposal}
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Applications of Scalable Machine Learning Models}\\ % Title
+} % Subtitle
+
+\author{\textsc{Mingzhe Xu} % Author
+\\{\textit{Northeastern University}}} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT AND KEYWORDS
+%----------------------------------------------------------------------------------------
+
+%\renewcommand{\abstractname}{Summary} % Uncomment to change the name of the abstract to something else
+
+%\begin{abstract}
+%Advertisement ranking is of great value to research given the enormous revenue it generates in industry. Predicting click through rate is not a brand new topic. Yet new methodologies and approaches to tackle it as well as improve the accuracy confer tremendous vitality to this subject. This thesis will focus on predicting the click through rate (CTR) of ads in a web search engine SOSO. 
+%\end{abstract}
+
+% \hspace*{3,6mm}\textit{Keywords:}  % Keywords
+
+\vspace{30pt} % Some vertical space between the abstract and first section
+
+%----------------------------------------------------------------------------------------
+%	ESSAY BODY
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+Machine learning is a method to enable computers to learn without explicitly being programmed.\cite{mldef} In the late 1990s, computer scientists started to train computers to build models given the advance of digitalization and cheaper computing power. With the vast volume and increasing complexity of data, as well as accessible and affordable storage in the past decades, interests in machine learning surged unprecedentedly and applications became almost ubiquitous, which make it possible to quickly and automatically produce models that can analyze complex data and deliver faster, more accurate results. Thomas H. Davenport once wrote in The Wall Street Journal that "humans can typically create one or two good models a week; machine learning can create thousands of models a week".\cite{wsj}  Precisely. Machine learning instantaneously presents high-value predictions that can guide better decisions and smarter actions in real time without any human intervention. 
+
+\subsection{The Applications of Machine Learning}
+The world now is swimming in machine learning products more than ever. In a variety of industries and analytical settings where access to troves of useful and reliable data is provided, machine learning is being frequently applied to explore useful information, generate accurate prediction, and directly or indirectly increase revenues. Online retailers can recommend products closely related to customers' interests. Amazon personalized recommendations, which base on customers' order history, items in carts, items rated or liked, and products similar customers viewed and purchased, provide heavily customized browsing experience for users. This personalized marketing has generated lots of revenue. According to a survey conducted in 2015, 68.4\%\cite{pr-revenue} of all revenue of the online retailer was from the recommendation system.  Netflix also provide individualized recommendations that greatly improved user experience and more than half of the viewing is from recommendation. Similarly, YouTube's Watch Next is also an embodiment of personalized recommendation. What's more, machine learning also pops up in web search results. Search engine is the lifeblood to Google, and personalized search results as well as customized ads display are core to the click through rate of the results. They are based on the combinations of queries, ads, results, and users' browsing history. In addition to Google, Facebook's News Feed, LinkedIn's Posts also ranks in a customized order. In banking system, credit scoring, fraud detection and next-best offers are all built on machine-learning algorithms.\cite{bank} The recent popular computer program AlphaGo beats professional human Go players after learning from a database of around 30 million moves.\cite{alphago} In speech and image recognition, machine-learning techniques are also widely used. \\In the meantime, there are constraints. With the exceptional increase in computing power, storage capacity and network bandwidth in the past decade, datasets are growing fast in fields such as search engine, bioinformatics, IT-security, speech/image recognition, or email record, to name but a few. The growth of data size leaves computational methods the only viable way of dealing with data. However, it poses new challenges to machine learning methods. Google processes around 100 PB per day on 3 million servers; YouTube has 300PB storage and around 4 billion views per day.\cite{youtube} The Big Data industry roughly process 2.5 quintillion bytes of data every day.\cite{bigdata} And the number is not still. Looking forward, in four years there will be 40 zetta-bytes of data. Therefore, how to make the learning process more efficient is vital to those companies. With at least 3.5 billion requests coming in everyday, what algorithms can make faster and more accurate response? What models can survive the training process on petabytes of data? 
+
+\subsection{The scalability of machine learning}
+This explosion of data tuned widespread attention to scalability, especially learning large-scale data. Scalable machine learning involves processing paradigms, statistical analysis, algorithms for data streams, and large scale convex optimization, etc. It is an integration of system, statistics, data mining and machine learning. Scalability is one of the key concepts in Big Data. Yet far beyond Big Data, scalable or large scale was a buzzword in machine learning ever since there were large amount of data such as dealing with text document or in bioinformatics. Datasets with large number of features, samples, or even when the data can't fit into the memory, solutions are needed to enable learning and processing. Currently, there are some solutions on different levels. In memory, we can intellectually swap between memory or disk. On the algorithmic level, we can use online algorithm which can constantly learn and predict as the data flows.\cite{onlinelearn} Also, faster and optimized algorithms are needed. Parallel algorithms are vital to higher efficiency. When data cannot fit into memory of a single machine, distributed algorithms can tackle this problem. \\
+
+In this thesis course and research work, studying scalable machine learning models and applying the concepts and theory into real world problems are the core purposes. In this semester, we've gone through several fundamental learning algorithms, as well as objective functions and models. Supervised learning problems are those with input features, such as linear regression and classification problems. Linear regression is used when the target variable to be predicted is continuous; when the prediction are discrete values such as predicting positive or negative of a certain disease, it is a classification problem. To minimize the cost functions, Least Mean Square algorithm, matrix derivatives or maximum likelihood estimate can be applied to derive the parameters for models.\cite{Linear} Logistic regression models assumes there is one smooth linear decision boundary and it is a powerful statistical way of modeling when the dependent variable is a binomial value. It is also the most prevalent algorithm for solving the scale problem in industry given its simplicity, efficiency and robustness. Supporting Vector Machine (SVM) relies on boundary cases to build the separating curves and obtain the optimal margin classifier. SVM can handle large feature spaces and the boundary cases also enable it to handle missing data such in text classification.\cite{svm, svm2} Naive Bayes is a family of algorithms for training such as Gaussian naive Bayes, Bernoulli, or multinomial naive Bayes, assuming that all values of variables are independent of other features.\cite{nb, nb2} Modeling with Naive Bayes can be simple and efficient while the conditions can be the constraints. Decision tree, or regression tree is derived by recursively partition the data space and fitting prediction model within each partition.\cite{decisiontree, decisiontree2, decisiontree3, decisiontree4} It is more intuitive and easy to interpret given the tree structure. While the complexity of the algorithm is it's main setback. In order to improve the classification rate, we can also use random forest, which applies a number of decision trees.\\
+After laying a theoretical foundation, I am going to design and experiment large-scale modeling techniques on the dataset from KDD Cup 2012 track 2, which is on advertisement ranking. Clicking ads prediction is of great value to research given the enormous revenue it generates in industry. Predicting click through rate (CTR) is central to multi-billion dollar business in Internet marketing. Contextual advertising, display advertising and search advertising all depend heavily on an efficient learning model that can accurately predict the click through rate.\cite{ctr, ctr2, ctr3, ctr4, ctr5, ctr6} Predicting click through rate is not a brand new topic. Yet new methodologies and approaches to tackle it as well as improve the accuracy confer tremendous vitality to this subject. This thesis will focus on applying large-scale learning techniques and predicting the CTR of ads in a web search engine. 
+
+
+%------------------------------------------------
+
+\section{Data}
+
+
+The dataset is provided by Tencent and from the competition in track 2 of KDD Cup 2012. It includes training data, testing data and other additional supporting datasets. Training data contains149, 639,105 instances while the testing data 20,297,594 instances. They both capture the data between user and search engine, including some shared features such as UserID, DisplayUrl, KeywordID, QueryID, AdID, AdvertiserID, DescriptionID, Position and Depth. In addition, the training data also has impression and click whereas the testing data does not. For each instance, the meaning is that in a case, the user is impressed with the ad for certain number of impressions and clicked the ad number of click times. The supporting data contains token lists of query, description and keyword.\\
+
+\begin{table}[ht]
+\centering
+\caption{Data Field Description}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Field Name}  & \textbf{Field Description}  \\ \hline
+UserID 				   & id  for user\\ \hline
+AdID                 & certain ad users impress or click   \\ \hline
+AdvertiserID       	   & advertiser for ad, a property of ad   \\ \hline
+Depth 	   		 & number of ads impressed in a session \\ \hline
+Position		   & the order of an ad in the impression list \\\hline
+KeywordID			   & the keyword of ad, a property of ad \\
+				   & it is the key of keyword token file\\ \hline
+QueryID		 	   & id of the query \\
+				& zero-based integer value, key of query token file\\ \hline
+DisplayURL			  & a property of the ads (hashed for anonymity) \\ \hline
+TitleID			&  a property of ads, key in title token file \\ \hline
+DescriptionID       &  a property of ads, key in description token file \\ \hline
+Click				&  number of times the user clicked the ad\\ \hline
+Impression 			& number of search sessions in which \\ 
+				& the ad was impressed by the user	\\ \hline
+\end{tabular}
+\end{table}
+
+The training data contains impression and click, where impression is the number of times the ad was impressed by the user, and click is the number of times the impression transferred into an actual click. For every impression, the user may click or not click the ad, which can be viewed as a binary classification.  In the original dataset, the click and impression are not binary-based values. Therefore a modification was made to accommodate binary classification. Each data instance was split into two with equivalent embodiment of the original CTR. For example, an instance with 4 clicks and 10 impressions will be split into 1 click with weight 4 and 0 click with weight 6. Regarding the features in the original dataset, modifications also made to have better prediction model. Each feature is represented by the corresponding value such as UserID, QueryID etc., and based these features new CTR features can be generated. For each categorical feature, we first group them and get the average click through rate for each category, then put the value back correspondingly to the original dataset as an additional column of feature. 
+
+%------------------------------------------------
+
+%\section{Methodology}
+%This research work will initially try a couple of models especially classification models such as logistic regression, Naïve Bayes. Logistic regression models are widely used in binary classification. 
+
+%------------------------------------------------
+\section{Validation}
+The solution will be validated by area under curve (AUC) of the receiver operating characteristic (ROC) curve. ROC curve depicts the classification performance in a two dimensional graph with false positive (FPR) rate and true positive (TPR) rate. Calculating the area under the ROC curve gives us the probability that the classifier ranks a randomly chosen positive instance higher than a randomly chosen negative instance.\cite{roc} Since ROC is in a unit space, AUC is a value between 0 and 1. In the coordinate, the best prediction method will yield a prediction on the upper left, (0, 1), which means that there is no false positive. This measurement is well known for ranking performance and classification performance. Though arguments exist on the coherency of AUC in measuring aggregated classifier performance, the proposed alternative was proved to be already available in the form of AUC.\cite{roc2, roc3}\\
+\includegraphics[width=0.8\textwidth]{/Users/mingzhexu/Desktop/maggie_xu_thesis/proposal/ROC_space.png} \\Figure. ROC Space (Wikipedia)\\
+%------------------------------------------------
+
+\section{Progress}
+Progress has been made on both data pre-processing and some initial modeling. The original dataset contains data on user and search engine, while their values can not be directly used in models. Therefore new CTR features were generated based on the original features. In addition to feature modification, the original data was downsized into a 5 million instances sample in order to process faster locally. Downsizing the data into 5 million instance sample is a valid approach for proof of concept. On one side, it is faster and more efficient for model selection and feature selection where datasets need to be run multiple times. On the other side, 5 million is a sufficient data sample size for initial processing of data and catch the gist of different features and models.
+\subsection{Data Preprocessing}
+
+\subsection{Initial Models}
+\includegraphics[width=0.8\textwidth]{/Users/mingzhexu/Desktop/maggie_xu_thesis/proposal/ROC.jpg}
+
+\section{Timeline}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+%\bibliographystyle{unsrt}
+
+\begin{thebibliography}{9}
+\bibitem{decisiontree4}
+Breiman, L., J. Friedman, and R. Olshen (1984). Classification and Regression trees. Wadsworth. 555 - 597
+\bibitem{bank}
+Chan, Philip K., and Salvatore J. Stolfo. "Toward Scalable Learning with Non-Uniform Class and Cost Distributions: A Case Study in Credit Card Fraud Detection." KDD. Vol. 1998.
+\bibitem{Linear} 
+Douglas C. Montgomery, Elizabeth A. Peck, G. Geoffrey Vining, Linear Regression Analysis, page 67-119, Edition 5, 2012
+\bibitem{nb2}
+Drugowitsch, J. (2008). Bayesian Linear Regression. Technical report, U.Rochester.
+\bibitem{ctr}
+D. Agarwal, B.-C. Chen, and P. Elango. Spatio-temporal models for estimating click-through rate. In Proceedings of the 18th international conference on World wide web, pages 21?30. ACM, 2009
+\bibitem{onlinelearn}
+Duchi, J., E. Hazan, and Y. Singer (2010), Adaptive Subgradient Methods for Online Learning and Stochastic Optimization. \\
+\href{url}{http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf}
+\bibitem{roc}
+Fawcett, Tom (2006); An introduction to ROC analysis, Pattern Recognition Letters, 27, 861?874\\\href{url}{https://ccrma.stanford.edu/workshops/mir2009/references/ROCintro.pdf}
+\bibitem{roc2}
+Hand, D.J. Measuring classifier performance: a coherent alternative to the area under the ROC curve. Machine learning, 77(1): 103?123, 2009. ISSN 0885-6125.
+\bibitem{roc3}
+Hanley, James A.; McNeil, Barbara J. (1983). "A method of comparing the areas under receiver operating characteristic curves derived from the same cases". Radiology 148 (3): 839?843. 
+\bibitem{decisiontree2}
+ Kim H, Loh WY. Classification trees with bivariate linear discriminant node models. J Comput Graphical Stat 2003, 12:512?530.
+ \bibitem{decisiontree3}
+ Kim H, Loh WY, Shih YS, Chaudhuri P. Visu- alizable and interpretable regression models with good prediction power. IIE Trans 2007, 39:565? 579.
+\bibitem{ctr5}
+M. Richardson, E. Dominowska, and R. Ragno. Predicting clicks: estimating the click-through rate for new ads. In Proceedings of the 16th international conference on World Wide Web, pages 521?530. ACM, 2007. 
+\bibitem{ctr6}
+M. Richardson, E. Dominowska, and R. Ragno. Predicting clicks: estimating the click-through rate for new ads. World Wide Web Conference Series, pages 521?530, 2007
+\bibitem{nb}
+ Rennie, J.; Shih, L.; Teevan, J.; Karger, D. (2003). Tackling the poor assumptions of Naive Bayes classifiers
+ \bibitem{svm2}
+Stuart Andrews, Ioannis Tsochantaridis and Thomas Hofmann: Support Vector Machines for Multiple-Instance Learning,\\ 
+\href{url}{https://www.robots.ox.ac.uk/~vgg/rg/papers/andrews\_etal\_NIPS02.pdf}
+\bibitem{svm}
+Thorsten Joachims: Text Categorization with Support Vector Machines: Learning with Many Relevant Features,\\
+\href{url}{http://www.cs.cornell.edu/people/tj/publications/joachims\_98a.pdf}
+\bibitem{decisiontree}
+Wei-Yin Loh: Classification and regression trees.\\ 
+\href{url}{http://www.stat.wisc.edu/~loh/treeprogs/guide/wires11.pdf}
+\bibitem{ctr4}
+O. Chapelle. Click modeling for display advertising. In AdML: 2012 ICML Workshop on Online Advertising, 2012. 
+\bibitem{mldef}
+Phil Simon (March 18, 2013). Too Big to Ignore: The Business Case for Big Data. Wiley. p. 89
+\bibitem{alphago}
+Silver, David, et al. "Mastering the game of Go with deep neural networks and tree search." Nature 529.7587 (2016): 484-489.
+\bibitem{ctr2}
+T. Graepel, J. Q. Candela, T. Borchert, and R. Herbrich. Web-scale Bayesian click-through rate prediction for sponsored search advertising in microsofts bing search engine. 2010
+\bibitem{ctr3}
+Z. A. Zhu, W. Chen, T. Minka, C. Zhu, and Z. Chen. A Novel Click Model and its Applications to Online Advertising.\\ http://research.microsoft.com/pubs/119092/WSDM2010.pdf
+\bibitem{youtube}
+\href{url}{http://www.slideshare.net/kmstechnology/big-data-overview-2013-2014}
+\bibitem{bigdata}
+\href{url}{http://cloudtweaks.com/2015/03/surprising-facts-and-stats-about-the-big-data-industry/}
+\bibitem{wsj}
+\href{url}{http://blogs.wsj.com/cio/2013/09/11/industrial-strength-analytics-with-machine-learning/}
+\bibitem{pr-revenue}
+\href{url}{https://www.marketingsherpa.com/article/chart/personalized-product-recommendations}
+%\bibliography{sample}
+\end{thebibliography}
+%----------------------------------------------------------------------------------------
+
+\end{document}
