@@ -22,7 +22,7 @@
 \usepackage{graphicx} % Required for including pictures
 \usepackage{wrapfig} % Allows in-line images
 \usepackage{hyperref}
-
+\usepackage{amsmath}
 \usepackage{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Required for accented characters
 \linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
@@ -101,29 +101,35 @@ There are two core purposes for this thesis course. First is learning and studyi
 %------------------------------------------------
 \section{Theoretical Foundation}
 Scalable machine learning is constructed with several key subjects. First is machine learning models that can be scalable. Second, efficient learning algorithms are key to a better prediction, with which the performance of the model will be much better. We also learned the model selection evaluation so as to better gauge the model's predicting power and select the best model. Last but not least, we covered feature design and feature selection.
+
 \subsection{Scalable ML Models}
 In this semester, we've gone through several fundamental learning algorithms, as well as objective functions and models. Supervised learning problems are those with input features, such as linear regression and classification problems. Linear regression is used when the target variable to be predicted is continuous; when the prediction are discrete values such as predicting positive or negative of a certain disease, it is a classification problem. To minimize the cost functions, Least Mean Square algorithm, matrix derivatives or maximum likelihood estimate can be applied to derive the parameters for models\cite{Linear}. Logistic regression models assumes there is one smooth linear decision boundary and it is a powerful statistical way of modeling when the dependent variable is a binomial value. It is also the most prevalent algorithm for solving the scale problem in industry given its simplicity, efficiency and robustness. Naive Bayes is a family of algorithms for training such as Gaussian naive Bayes, Bernoulli, or multinomial naive Bayes, assuming that all values of variables are independent of other features\cite{nb, nb2}. Modeling with Naive Bayes can be simple and efficient while the conditions can be the constraints.\\
 
 Supporting Vector Machine (SVM) relies on boundary cases to build the separating curves and obtain the optimal margin classifier. SVM can handle large feature spaces and the boundary cases also enable it to handle missing data such in text classification\cite{svm, svm2}. We've also discussed about decision tree, or regression tree, which is derived by recursively partition the data space and fitting prediction model within each partition\cite{decisiontree, decisiontree2, decisiontree3, decisiontree4}. It is more intuitive and easy to interpret given the tree structure. While the complexity of the algorithm is it's main setback. In order to improve the classification rate, we can also use random forest, which applies a number of decision trees\cite{rf}.\\
 
 Aside from these basic modeling methods, we are also going to try ensemble modeling such as AdaBoost, Deep Neural Network and Markov Chain Monte Carlo (MCMC). AdaBoost is a meta-algorithm which is used in conjunction with other learning algorithms to improve performances\cite{adaboost}. The training process is efficient since it picks features which improve the predictive power of the model based on the weight and intermediate result for each round. Therefore, it reduces dimensionality and  improves the efficiency of learning as less relevant features are not being evaluated. Deep Neural Network(DNN) is also a scalable model and promising to try in practice. DNN is good with modeling complex non-linear relationships\cite{dnn, dnn1}. Also, since it has multiple hidden layers of units between the input and output layers, it enables the composition of features from lower layers, making it possible to model complex data with fewer units.
+
 \subsection{Efficient Learning Algorithms}
-Convex optimization [gradient based algorithm, Newton]
-Parallel. [stochastic] gradient descent/ascent
+Learning algorithms' efficiency can be amplified through two approaches. One is to improve the processing time; second is to process parallel so as to obtain predicting results faster. For the first approach, there is a special class of optimization problems called convex optimization problems\cite{opt, opt1}. It can efficiently solve real-world problem in a reasonable amount of time with gradient algorithms. One of the applications is SVM where convex optimization method is heavily used. Parallelizability is an important feature for efficient algorithms. Stochastic parallel gradient descent/ascent algorithm is often used for its capability of processing efficiency. Though it had synchronization problem that may affect its performance, but an lock-free approach successfully tackled it\cite{opt2}.
+
 \subsection{Model Selection Evaluation}
-Train, CV, Test
-     2. Eval metrics [MSE, RMSE, AbsError/L1, ROC, F1 metrics, etc.]
-     3. Regularization
-\subsection{Feature Design/Selection}
-1. PCA, SVD, Maximum Mutual Information [selection]
-     2. [design]
+In model selection, cross validation is a basic technique. Generally, the dataset S will be split into a training set (70\%) and a cross validation set (30\%). Then the model will be trained and fitted on the training data to get the parameters. Later, we pick the model that render the smallest error on the hold out cross validation dataset\cite{cv}. In case that the data is scarce, k-fold cross validation and leave-one-out cross validation would be the choices for model selection.\\
+
+Other than cross validation, there are evaluation matrixes that can tell the performance of a model. Mean Squared Error, also called Mean Squared Deviation, measures the average of the squares of errors, which is the distance between the predicted value and real value. Taking square root of MSE will get to Root Mean Square Error (RMSE). RMSE is the square root of the variance for an unbiased estimator. Mean Absolute Error, called L1 error as well, is also a loss function that captures the difference between the forecast and the actual outcomes. Another evaluating matrix used often is Receiver Operator Characteristic curve (ROC curve). It depicts the true positive rate and false positive rate on a unit space, and the curve shows the relative tradeoffs between true positive, which is the benefits and false positive, which is loss. The area under the curve (AUC) is an estimator for the probability that a classifier will rank a randomly chosen positive instance higher than a randomly chosen negative one\cite{roc}. \\
+
+Overfitting is a setback for modeling. Regularization is a process or technique to introduce additional information into the loss function to battle against overfitting. Applying regularization to models can improve the generalization of a model. In applications, regulation takes place either explicitly in the form of the functions or by adding constraints to the minimization function\cite{cv, ridge}. Especially for complicated functions or models, minimization algorithm can penalize more complex functions. Tikhonov regularization, or ridge regression, is an example of this case and commonly used. Also, regulation can be implemented in a way to constrain the hypothesis space, such as Ivanov regularization. There is also Lasso Regression analytical method that can be applied for regulation.
+
+\subsection{Feature Selection/Design}
+Feature selection is a special case in model selection. Given a large set of n features it is vital to pick a good subset of features to make prediction. One is wrapper model feature selection, which makes calls to the learning model repeatedly with different subsets of data. It includes forward search and backward search. Filter feature selection is much efficient compared with the wrapper method\cite{cv}. For each feature, first calculate a score between this feature and the predicted value. Then this is the mutual information between feature i and dependent variable. Maximum mutual information estimation thus can be used to obtain a valid score for the revealing information of features\cite{mi, mi1}. Finally based on the ranking of the scores for each feature, use cross validation to choose the number of features to be used in the model.\\ 
+
+Reducing dimensionality can also be achieved by using principal component analysis(PCA) or singular value decomposition( SVD)\cite{pca, svd}. These two methods both serve for dimension reduction while retaining important information of the original full data. 
 
 \section{Experiments with Scalable Machine Learning}
 After laying a theoretical foundation, I am going to design and experiment large-scale modeling techniques on the dataset from KDD Cup 2012 track 2, which is on advertisement ranking. Clicking ads prediction is of great value to research given the enormous revenue it generates in industry. Predicting click through rate (CTR) is central to multi-billion dollar business in Internet marketing. Contextual advertising, display advertising and search advertising all depend heavily on an efficient learning model that can accurately predict the click through rate\cite{ctr, ctr2, ctr3, ctr4, ctr5, ctr6}. Predicting click through rate is not a brand new topic. Yet new methodologies and approaches to tackle it as well as improve the accuracy confer tremendous vitality to this subject. This thesis will focus on applying large-scale learning techniques and predicting the CTR of ads in a web search engine. 
 
-\subsection{Problem Definition/Description}
+\subsection{Problem Definition}
 Search advertising has been one of the major revenue sources of the Internet industry for years. A key technology behind search advertising is to predict the click-through rate (pCTR) of ads, as the economic model behind search advertising requires pCTR values to rank ads and to price clicks. In this task, given the training instances derived from session logs of the Tencent proprietary search engine, soso.com, participants are expected to accurately predict the pCTR of ads in the testing instances.
-\subsection{Data}
+\subsection{Data Description}
 \begin{table}[ht]
 \centering
 \caption{Data File Description}
@@ -163,7 +169,7 @@ QueryID		 	& id of the query \\
 DisplayURL		& a property of the ads (hashed for anonymity) \\ \hline
 TitleID			&  a property of ads, key in title token file \\ \hline
 DescriptionID      	 &  a property of ads, key in description token file \\ \hline
-Click				&  number of times the user clicked the ad\\ \hline
+Click			&  number of times the user clicked the ad\\ \hline
 Impression 		& number of search sessions in which \\ 
 				& the ad was impressed by the user	\\ \hline
 \end{tabular}
@@ -174,7 +180,7 @@ The training data contains impression and click, where impression is the number 
 %------------------------------------------------
 \subsection{Evaluation Criteria}
 The solution will be validated by area under curve (AUC) of the receiver operating characteristic (ROC) curve. ROC curve depicts the classification performance in a two dimensional graph with false positive (FPR) rate and true positive (TPR) rate. Calculating the area under the ROC curve gives us the probability that the classifier ranks a randomly chosen positive instance higher than a randomly chosen negative instance\cite{roc}. Since ROC is in a unit space, AUC is a value between 0 and 1. In the coordinate, the best prediction method will yield a prediction on the upper left, (0, 1), which means that there is no false positive. This measurement is well known for ranking performance and classification performance. Though arguments exist on the coherency of AUC in measuring aggregated classifier performance, the proposed alternative was proved to be already available in the form of AUC\cite{roc2, roc3}.\\
-\includegraphics[width=0.5\textwidth]{/Users/mingzhexu/Desktop/maggie_xu_thesis/proposal/ROC_space.png} \\Figure. ROC Space (Wikipedia)\\
+\includegraphics[width=0.7\textwidth]{/Users/mingzhexu/Desktop/maggie_xu_thesis/proposal/ROC_space.png} \\Figure. ROC Space (Wikipedia)\\
 
 \subsection{Preliminary Results}
 Progress has been made on both data pre-processing and some initial modeling. The original dataset contains data on user and search engine, while their values can not be directly used in models. Therefore new CTR features were generated based on the original features. For the dependent variable, which is click, changes were made as well. The raw data contains click value ranging from 0 up to thousands, and the corresponding impression data is an integer larger than click. However, I would like to treat the clicking event as a binary value, either click or not click. Therefore, I made a change to the data on the impression and click. Based on the impression, if it is larger than 1, then the data instance will be split based on how many clicks it has. If the number of clicks is equal to impression, then the click will be updated to 1. If the number of clicks is 0 then no modification is needed. Otherwise, the instance will be split into to two instances. The clicks will be 1 and 0 respectively and impressions for 1 will be the original number of clicks, while impression for 0 will be the  original number of impressions minus the original number of clicks. Other than the given features in the original data, new features will be generated from the token files as well. For features such as query, title and description, the token strings will be stemmed using Snowball stemmer. What's more, term frequency-inverse document frequency (tf-idf) will be used for user's query and ads' description\cite{tf-idf}.\\
@@ -182,7 +188,7 @@ Progress has been made on both data pre-processing and some initial modeling. Th
 In addition to feature modification, the original data was downsized into a 5 million instances sample in order to process faster locally. The original data contains 150 million data instances with 10gb raw train data as well as token data, user profiles data. Downsizing the data into 5 million instance sample is a valid approach for this stage of proof of concept. On one side, it is faster and more efficient for model selection and feature selection where datasets need to be run multiple times so as to get the best score for features and models. On the other side, 5 million is a sufficient data sample size for initial processing of data and catch the gist for different sets of features and models.\\
 
 Regarding trying different models, logistic regression model, based on the theoretical view, is efficient for large scale learning and good for its robustness to overfitting. I first tried this model on all the features I have for now. With 5 million instances, I split the data into two parts, training and testing, 70\% and 30\% respectively for cross validation. Here is the preliminary result after running on my sampled data.\\
-\includegraphics[width=0.8\textwidth]{/Users/mingzhexu/Desktop/maggie_xu_thesis/proposal/ROC.jpg}\\
+\includegraphics[width=0.7\textwidth]{/Users/mingzhexu/Desktop/maggie_xu_thesis/proposal/ROC.jpg}\\
 The AUC score is 0.84 which is much higher than the given benchmarks. However, due to the fact that the datasets I adopted are sampled from the original data, the variance is higher so this score might be a little bit higher than fitting the model on the full data, which contains a test file with more than 20 million instances.
 
 %------------------------------------------------
@@ -199,6 +205,10 @@ Third, after finding the model with top AUC scores on my sample data, I will nee
 %----------------------------------------------------------------------------------------
 %\bibliographystyle{unsrt}
 \begin{thebibliography}{9}
+\bibitem{mi}
+Bahl, L. R., et al. "Maximum mutual information estimation of hidden Markov model parameters for speech recognition." proc. icassp. Vol. 86. 1986.
+\bibitem{dnn1}
+Bengio, Yoshua (2009). "Learning Deep Architectures for AI". Foundations and Trends in Machine Learning 2 (1): 1-127. \\ Retrieved from \href{url}{https://www.iro.umontreal.ca/~lisa/pointeurs/TR1312.pdf}
 \bibitem{decisiontree4}
 Breiman, L., J. Friedman, and R. Olshen (1984). Classification and Regression trees. Wadsworth. 555 - 597
 \bibitem{bank}
@@ -215,6 +225,9 @@ Duchi, J., E. Hazan, and Y. Singer (2010), Adaptive Subgradient Methods for Onli
 \bibitem{roc}
 Fawcett, Tom (2006); An introduction to ROC analysis, Pattern Recognition Letters, 27, 861-874. Retrieved from\\
 \href{url}{https://ccrma.stanford.edu/workshops/mir2009/references/ROCintro.pdf}
+\bibitem{opt2}
+Feng Niu, Benjamin Recht, Christopher Re, Stephen J. Wright: HOGWILD!: A Lock-Free Approach to Parallelizing Stochastic Gradient Descent. \\ Retrieved from: 
+\href{url}{http://www.eecs.berkeley.edu/~brecht/papers/hogwildTR.pdf}
 \bibitem{roc2}
 Hand, D.J. Measuring classifier performance: a coherent alternative to the area under the ROC curve. Machine learning, 77(1): 103-123, 2009. ISSN 0885-6125.
 \bibitem{roc3}
@@ -225,10 +238,14 @@ Hanley, James A.; McNeil, Barbara J. (1983). "A method of comparing the areas un
  Kim H, Loh WY, Shih YS, Chaudhuri P. Visu- alizable and interpretable regression models with good prediction power. IIE Trans 2007, 39:565-579.
  \bibitem{rf}
  Liaw, Andy, and Matthew Wiener. "Classification and regression by randomForest." R news 2.3 (2002): 18-22.
+\bibitem{opt1}
+M. Grant and S. Boyd. CVX: Matlab software for disciplined convex programming (web page and software). http://stanford.edu/~boyd/cvx/, September 2008.
 \bibitem{ctr5}
 M. Richardson, E. Dominowska, and R. Ragno. Predicting clicks: estimating the click-through rate for new ads. In Proceedings of the 16th international conference on World Wide Web, pages 521-530. ACM, 2007. 
 \bibitem{ctr6}
 M. Richardson, E. Dominowska, and R. Ragno. Predicting clicks: estimating the click-through rate for new ads. World Wide Web Conference Series, 2007
+\bibitem{cv}
+Ng. Andrew, CS229 Lecture Note, Regularization and model selection. \\Retrieved from \href{url}{http://cs229.stanford.edu/notes/cs229-notes5.pdf}
 \bibitem{nb}
  Rennie, J.; Shih, L.; Teevan, J.; Karger, D. (2003). Tackling the poor assumptions of Naive Bayes classifiers
  \bibitem{svm2}
@@ -246,10 +263,21 @@ O. Chapelle. Click modeling for display advertising. In AdML: 2012 ICML Workshop
 Phil Simon (March 18, 2013). Too Big to Ignore: The Business Case for Big Data. Wiley. p. 89
 \bibitem{tf-idf}
 Ramos, Juan. "Using tf-idf to determine word relevance in document queries." Proceedings of the first instructional conference on machine learning. 2003.
+\bibitem{dnn}
+Schmidhuber, Jürgen. "Deep learning in neural networks: An overview." Neural Networks 61 (2015): 85-117.
+\bibitem{pca}
+Shlens Jonathon: A Tutorial on Principal Component Analysis. \\Retrieved From: \href{url}{http://arxiv.org/pdf/1404.1100v1.pdf}
 \bibitem{alphago}
 Silver, David, et al. "Mastering the game of Go with deep neural networks and tree search." Nature 529.7587 (2016): 484-489.
+\bibitem{opt}
+ Stephen Boyd and Lieven Vandenberghe. Convex Optimization. Cambridge UP, 2004. Online: http://www.stanford.edu/~boyd/cvxbook/
 \bibitem{ctr2}
 T. Graepel, J. Q. Candela, T. Borchert, and R. Herbrich. Web-scale Bayesian click-through rate prediction for sponsored search advertising in microsofts bing search engine. 2010
+\bibitem{ridge}
+Tibshirani Ryan: CMU Statistics Notes, Ridge Regression. Retrieved From \\
+\href{url}{http://www.stat.cmu.edu/~ryantibs/datamining/lectures/16-modr1.pdf}
+\bibitem{svd}
+Wall, Michael E., Andreas Rechtsteiner, Luis M. Rocha (2003). "Singular value decomposition and principal component analysis". In D.P. Berrar, W. Dubitzky, M. Granzow. A Practical Approach to Microarray Data Analysis. Norwell, MA: Kluwer. pp. 91?109.
 \bibitem{ctr3}
 Z. A. Zhu, W. Chen, T. Minka, C. Zhu, and Z. Chen. A Novel Click Model and its Applications to Online Advertising.\\ http://research.microsoft.com/pubs/119092/WSDM2010.pdf
 \bibitem{youtube}
@@ -264,12 +292,11 @@ Article retrieved from
 \bibitem{pr-revenue}
 Article retrieved from
 \href{url}{https://www.marketingsherpa.com/article/chart/personalized-product-recommendations}
+\bibitem{mi1}
+Notes retrieved from:\\ \href{url}{https://depts.washington.edu/uwcl/twiki/pub/Main/Probability/}mmic.pdf
 \bibitem{adaboost}
 Yoav Freund , Robert E. Schapire: A Short Introduction to Boosting (1999),\\ retrieved from \href{url}{http://www.site.uottawa.ca/~stan/csi5387/boost-tut-ppr.pdf}
-\bibitem{dnn}
-Schmidhuber, Jürgen. "Deep learning in neural networks: An overview." Neural Networks 61 (2015): 85-117.
-\bibitem{dnn1}
-Bengio, Yoshua (2009). "Learning Deep Architectures for AI". Foundations and Trends in Machine Learning 2 (1): 1-127. \\ Retrieved from \href{url}{https://www.iro.umontreal.ca/~lisa/pointeurs/TR1312.pdf}
+
 %\bibliography{sample}
 \end{thebibliography}
 %----------------------------------------------------------------------------------------
